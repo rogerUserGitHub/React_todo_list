@@ -52,18 +52,29 @@ function App() {
         const newTodos = todos.filter(todo => !todo.complete)
         setTodos(newTodos);
     }
-    
+
     return (
-    // cant put 2 elements in return. Use of <> wrapper/empty element = fragment
-    // toggleTodo: pass function down to ToDolist to change value of todo item
+        // cant put 2 elements in return. Use of <> wrapper/empty element = fragment
+        // toggleTodo: pass function down to ToDolist to change value of todo item
         <>
-            <ToDoList todos={todos} toggleTodo={toggleTodo} />
-            <input ref={todoNameRef} type="text" />
-            <button onClick={handleAddTodo}>Add Todo</button>
-            <button onClick={handleClearTodos}>Clear Complete</button>
-            <div>{todos.filter(todo => !todo.complete).length} left to do</div>
+            <div className="container">
+                <div className="container-content">
+                    <input ref={todoNameRef} type="text" />
+                    <button className="btn" onClick={handleAddTodo}>Add Todo</button>
+                    <button className="btn" onClick={handleClearTodos}>Clear Complete</button>
+                    <div>{todos.filter(todo => !todo.complete).length} left to do</div>
+                </div>
+            </div>
+            <br />
+            <div className={
+                (todos.filter(todo => !todo.complete || todo.complete).length == 0) ? 'container-2' : 'container-3'
+            }>
+                <ToDoList todos={todos} toggleTodo={toggleTodo} />
+            </div>
+
+
         </>
-  );
+    );
 };
 
 export default App;
